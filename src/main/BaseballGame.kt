@@ -1,6 +1,7 @@
 package main
 
-val ROUND_COUNT: Int = 9
+val NUMBER_UNITS: Int = 4
+val ROUND_COUNT: Int = 20
 
 fun main(args: Array<String>) {
 	process()
@@ -8,7 +9,7 @@ fun main(args: Array<String>) {
 
 fun process() {
 	// create random number
-	val randNum: String = createRandomValue()
+	val randNum: String = createRandomValue(NUMBER_UNITS)
 
 	var stringInput: String
 	var round: Int = 1
@@ -16,7 +17,7 @@ fun process() {
 		print("Enter text: ")
 		stringInput = readLine()!!
 
-		if (stringInput.length == 3) {
+		if (stringInput.length == NUMBER_UNITS) {
 			if (checkSameNum(stringInput)) {
 				println("Don't duplicate same number")
 				continue
@@ -25,14 +26,14 @@ fun process() {
 			println("===== Round ${round} =====")
 			println("You entered: $stringInput")
 			val result: IntArray = compare(randNum, stringInput)
-			if (result[0] == 3) {
+			if (result[0] == NUMBER_UNITS) {
 				println("${result[0]} Strike!!! Game End")
 				break
 			} else {
 				println("${result[0]} Strike / ${result[1]} Ball / ${result[2]} Out")
 			}
 		} else {
-			println("You need enter to 3-digits")
+			println("You need enter to ${NUMBER_UNITS}-digits")
 			continue
 		}
 
@@ -72,7 +73,7 @@ fun compare(originVal: String, inpVal: String): IntArray {
 }
 
 // 서로 다른숫자로 랜덤뽑기
-fun createRandomValue(len: Int = 3): String {    // default value
+fun createRandomValue(len: Int = NUMBER_UNITS): String {    // default value
 	var result: String = ""    // 수정 가능한 변수 
 	val numDic: Array<Int> = arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) // 불변 변수
 
